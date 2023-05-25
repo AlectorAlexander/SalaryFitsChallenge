@@ -245,7 +245,12 @@ Launch.init(
     },
     {
         sequelize: db, // Conexão com o banco de dados
-        modelName: "Launch", // Nome do modelo (opcional)
+        modelName: "Launch", 
+        tableName: "launchs", 
+        freezeTableName: true, 
+        underscored: true, 
+        paranoid: true, 
+        charset: "utf8", // Charset da tabela (opcional)
         timestamps: false, // Defina como false se não quiser adicionar colunas de timestamps
     }
 );
