@@ -1,4 +1,4 @@
 import { Sequelize } from "sequelize";
-import * as config from "../config/database";
+import config from "../config/sequelize.config";
 
 export default new Sequelize(config);
