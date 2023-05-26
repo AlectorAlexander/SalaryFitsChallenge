@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
-const axios = require('axios');
+const axios = require('axios')
 
 module.exports = {
   up: async function (queryInterface, Sequelize) {
     try {
-      const response = await axios.get('https://api.spacexdata.com/v4/payloads');
-      const payloads = response.data;
+      const response = await axios.get('https://api.spacexdata.com/v4/payloads')
+      const payloads = response.data
 
       const payloadData = payloads.map(payload => ({
         id: payload.id,
@@ -36,16 +36,16 @@ module.exports = {
         mean_motion: payload.mean_motion,
         raan: payload.raan,
         arg_of_pericenter: payload.arg_of_pericenter,
-        mean_anomaly: payload.mean_anomaly,
-      }));
+        mean_anomaly: payload.mean_anomaly
+      }))
 
-      return queryInterface.bulkInsert('payloads', payloadData);
+      return queryInterface.bulkInsert('payloads', payloadData)
     } catch (error) {
-      console.error('Erro ao obter dados dos payloads:', error);
+      console.error('Erro ao obter dados dos payloads:', error)
     }
   },
 
   down: async function (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('payloads', null, {});
+    await queryInterface.bulkDelete('payloads', null, {})
   }
-};
+}

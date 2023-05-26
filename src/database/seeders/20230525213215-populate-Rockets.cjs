@@ -1,12 +1,12 @@
-'use strict';
+'use strict'
 
-const axios = require('axios');
+const axios = require('axios')
 
 module.exports = {
   up: async function (queryInterface, Sequelize) {
     try {
-      const response = await axios.get('https://api.spacexdata.com/v4/rockets');
-      const rockets = response.data;
+      const response = await axios.get('https://api.spacexdata.com/v4/rockets')
+      const rockets = response.data
 
       const rocketData = rockets.map(rocket => ({
         id: rocket.id,
@@ -32,16 +32,16 @@ module.exports = {
         wikipedia: rocket.wikipedia,
         description: rocket.description,
         createdAt: new Date(),
-        updatedAt: new Date(),
-      }));
+        updatedAt: new Date()
+      }))
 
-      return queryInterface.bulkInsert('rockets', rocketData);
+      return queryInterface.bulkInsert('rockets', rocketData)
     } catch (error) {
-      console.error('Erro ao obter dados dos rockets:', error);
+      console.error('Erro ao obter dados dos rockets:', error)
     }
   },
 
   down: async function (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('rockets', null, {});
+    await queryInterface.bulkDelete('rockets', null, {})
   }
-};
+}

@@ -6,32 +6,32 @@ class Launch extends sequelize_1.Model {
     static associate(models) {
         // Relação 1 para 1 com Rocket
         Launch.belongsTo(models.Rocket, {
-            foreignKey: "rocketId",
-            as: "rocket",
+            foreignKey: 'rocketId',
+            as: 'rocket',
         });
         // Relação muitos para muitos com Capsule
         Launch.belongsToMany(models.Capsule, {
-            through: "LaunchCapsules",
-            foreignKey: "launchId",
-            otherKey: "capsuleId",
-            as: "capsules",
+            through: 'LaunchCapsules',
+            foreignKey: 'launchId',
+            otherKey: 'capsuleId',
+            as: 'capsules',
         });
         // Relação muitos para 1 com Payload
         Launch.hasMany(models.Payload, {
-            foreignKey: "launchId",
-            as: "payloads",
+            foreignKey: 'launchId',
+            as: 'payloads',
         });
         // Relação 1 para muitos com LaunchPad
         Launch.belongsTo(models.LaunchPad, {
-            foreignKey: "launchPadId",
-            as: "launchPad",
+            foreignKey: 'launchPadId',
+            as: 'launchPad',
         });
         // Relação muitos para muitos com Core
         Launch.belongsToMany(models.Core, {
-            through: "LaunchCores",
-            foreignKey: "launchId",
-            otherKey: "coreId",
-            as: "cores",
+            through: 'LaunchCores',
+            foreignKey: 'launchId',
+            otherKey: 'coreId',
+            as: 'cores',
         });
     }
 }
@@ -52,19 +52,19 @@ Launch.init({
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-        field: "tdb",
+        field: 'tdb',
     },
     net: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-        field: "net",
+        field: 'net',
     },
     window: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
-        field: "window",
+        field: 'window',
         validate: {
             min: 0,
             max: 24,
@@ -88,12 +88,12 @@ Launch.init({
         type: sequelize_1.DataTypes.JSON,
         allowNull: false,
         defaultValue: [],
-        field: "failures",
+        field: 'failures',
     },
     details: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        field: "details",
+        field: 'details',
     },
     crew: {
         type: sequelize_1.DataTypes.JSON,
@@ -103,83 +103,83 @@ Launch.init({
         type: sequelize_1.DataTypes.JSON,
         allowNull: false,
         defaultValue: [],
-        field: "cores",
+        field: 'cores',
     },
     ships: {
         type: sequelize_1.DataTypes.JSON,
         allowNull: false,
         defaultValue: [],
-        field: "ships",
+        field: 'ships',
     },
     capsules: {
         type: sequelize_1.DataTypes.JSON,
         allowNull: false,
         defaultValue: [],
-        field: "capsules",
+        field: 'capsules',
     },
     payloads: {
         type: sequelize_1.DataTypes.JSON,
         allowNull: false,
         defaultValue: [],
-        field: "payloads",
+        field: 'payloads',
     },
     launchpad: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        field: "launchpad",
+        field: 'launchpad',
     },
     upcoming: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-        field: "upcoming",
+        field: 'upcoming',
     },
     autoUpdate: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-        field: "auto-update",
+        field: 'auto-update',
     },
     name: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        field: "name",
+        field: 'name',
     },
     dateUtc: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        field: "date_utc",
+        field: 'date_utc',
     },
     dateUnix: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
-        field: "date_unix",
+        field: 'date_unix',
     },
     dateLocal: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        field: "date_local",
+        field: 'date_local',
     },
     datePrecision: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        field: "date_precision",
+        field: 'date_precision',
     },
     dateTbd: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
-        field: "date_tbd",
+        field: 'date_tbd',
     },
     dateTbdPrecision: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        field: "date_tbd_precision",
+        field: 'date_tbd_precision',
     },
     dateTbdWindow: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
-        field: "date_tbd_window",
+        field: 'date_tbd_window',
     },
     id: {
         type: sequelize_1.DataTypes.STRING,
@@ -188,12 +188,12 @@ Launch.init({
     },
 }, {
     sequelize: _1.default,
-    modelName: "Launch",
-    tableName: "launchs",
+    modelName: 'Launch',
+    tableName: 'launchs',
     freezeTableName: true,
     underscored: true,
     paranoid: true,
-    charset: "utf8",
+    charset: 'utf8',
     timestamps: false, // Defina como false se não quiser adicionar colunas de timestamps
 });
 exports.default = Launch;
