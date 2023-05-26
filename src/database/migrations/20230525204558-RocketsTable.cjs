@@ -6,99 +6,99 @@ module.exports = {
       id: {
         type: Sequelize.STRING,
         primaryKey: true,
-        allowNull: false
+        allowNull: false,
       },
       height: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       diameter: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       mass: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       first_stage: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       second_stage: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       engines: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       landing_legs: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       payload_weights: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       flickr_images: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
       },
       type: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
       },
       active: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: true,
       },
       stages: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true,
       },
       boosters: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true,
       },
       cost_per_launch: {
         type: Sequelize.FLOAT,
-        allowNull: false
+        allowNull: true,
       },
       success_rate_pct: {
         type: Sequelize.FLOAT,
-        allowNull: false
+        allowNull: true,
       },
       first_flight: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
       },
       country: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
       },
       company: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
       },
       wikipedia: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true,
       },
       description: {
         type: Sequelize.TEXT,
-        allowNull: false
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true,
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true,
       }
     });
   },

@@ -39,22 +39,31 @@ module.exports = {
       launch_attempts: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
       launch_successes: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
       rockets: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: false,
+        defaultValue: '',
       },
       launches: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: '',
+      },
+      status: {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      status: {
-        type: Sequelize.STRING,
+      details: {
+        type: Sequelize.TEXT,
         allowNull: false,
+        defaultValue: '',
       },
       createdAt: {
         type: Sequelize.DATE,

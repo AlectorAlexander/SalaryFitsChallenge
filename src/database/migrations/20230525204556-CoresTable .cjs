@@ -10,7 +10,7 @@ module.exports = {
       },
       block: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       reuse_count: {
         type: Sequelize.INTEGER,
@@ -34,8 +34,12 @@ module.exports = {
       },
       last_update: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
+      launches: {
+        type: Sequelize.JSON,
+        allowNull: true,
+    },
       serial: {
         type: Sequelize.STRING,
         allowNull: false,

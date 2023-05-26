@@ -1,6 +1,17 @@
 import { Model, DataTypes } from "sequelize";
 import db from ".";
 
+
+interface Patch {
+    small: string;
+    large: string;
+  }
+  
+  interface Links {
+    patch: Patch;
+  }
+  
+
 interface Reddit {
     campaign: string;  // URL da campanha relacionada ao lançamento
     launch: string;  // URL da discussão oficial do lançamento
@@ -21,7 +32,7 @@ interface Reddit {
   
 
 class Launch extends Model {
-    public links !: object /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */;
+    public links !: Links /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */;
     public reddit !: Reddit; /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */
     public flickr !: Flickr; /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */
     public tdb !: boolean; /* Um valor booleano que indica se a data de lançamento é "Para Ser Determinado" (To Be Determined). */

@@ -22,7 +22,7 @@ module.exports = {
       },
       last_update: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       serial: {
         type: Sequelize.STRING,
@@ -35,6 +35,11 @@ module.exports = {
       type: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      launches: {
+        type: Sequelize.JSON, // Usando o tipo JSON para armazenar o array
+        allowNull: false,
+        defaultValue: [], // Valor padrão como um array vazio
       },
       createdAt: {
         type: Sequelize.DATE,

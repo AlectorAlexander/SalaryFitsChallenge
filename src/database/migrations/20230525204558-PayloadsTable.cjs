@@ -9,28 +9,28 @@ module.exports = {
         allowNull: false,
       },
       dragon: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       type: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       reused: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
       },
       launch: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       customers: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: '[]',
         get() {
           const value = this.getDataValue('customers');
@@ -42,7 +42,7 @@ module.exports = {
       },
       norad_ids: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: '[]',
         get() {
           const value = this.getDataValue('norad_ids');
@@ -54,7 +54,7 @@ module.exports = {
       },
       nationalities: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: '[]',
         get() {
           const value = this.getDataValue('nationalities');
@@ -66,7 +66,7 @@ module.exports = {
       },
       manufacturers: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: '[]',
         get() {
           const value = this.getDataValue('manufacturers');
@@ -78,23 +78,23 @@ module.exports = {
       },
       mass_kg: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       mass_lbs: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       orbit: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       reference_system: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       regime: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       longitude: {
         type: Sequelize.FLOAT,
@@ -102,51 +102,51 @@ module.exports = {
       },
       semi_major_axis_km: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       eccentricity: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       periapsis_km: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       apoapsis_km: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       inclination_deg: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       period_min: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       lifespan_years: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       epoch: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       mean_motion: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       raan: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       arg_of_pericenter: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       mean_anomaly: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
     });
   },

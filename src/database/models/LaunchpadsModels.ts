@@ -81,6 +81,10 @@ Launchpads.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        details: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         id: {
             type: DataTypes.STRING,
             primaryKey: true,
