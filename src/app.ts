@@ -1,6 +1,7 @@
 import express, { Express } from 'express';
 import LaunchRoutes from './routes/LaunchRoutes';
 import capsulesRoutes from './routes/CapsuleRoutes';
+import coresRoutes from './routes/CoresRoutes';
 
 class App {
   private app: Express;
@@ -19,6 +20,7 @@ class App {
   private routes(): void {
     this.app.use('/launches', LaunchRoutes);
     this.app.use('/capsules', capsulesRoutes);
+    this.app.use('/cores', coresRoutes);
   }
 
   public start(port: number): void {
