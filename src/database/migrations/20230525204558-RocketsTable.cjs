@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -6,104 +6,104 @@ module.exports = {
       id: {
         type: Sequelize.STRING,
         primaryKey: true,
-        allowNull: false,
+        allowNull: false
       },
       height: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       diameter: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       mass: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       first_stage: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       second_stage: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       engines: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       landing_legs: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       payload_weights: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       flickr_images: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       type: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       active: {
         type: Sequelize.BOOLEAN,
-        allowNull: true,
+        allowNull: true
       },
       stages: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       boosters: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       cost_per_launch: {
         type: Sequelize.FLOAT,
-        allowNull: true,
+        allowNull: true
       },
       success_rate_pct: {
         type: Sequelize.FLOAT,
-        allowNull: true,
+        allowNull: true
       },
       first_flight: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       country: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       company: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       wikipedia: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       description: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: true
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: true
       }
-    });
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('rockets');
+    await queryInterface.dropTable('rockets')
   }
-};
+}

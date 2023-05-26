@@ -1,39 +1,10 @@
-import { Model, DataTypes } from "sequelize";
-import db from ".";
-
-
-interface Patch {
-    small: string;
-    large: string;
-  }
-  
-  interface Links {
-    patch: Patch;
-  }
-  
-
-interface Reddit {
-    campaign: string;  // URL da campanha relacionada ao lançamento
-    launch: string;  // URL da discussão oficial do lançamento
-    media: string;  // URL da discussão de mídia relacionada ao lançamento
-    recovery: null;  // Valor nulo indicando que não há URL de recuperação disponível
-  }
-  
-  interface Flickr {
-    small: string[];  // Array de URLs de imagens pequenas
-    original: string[];  // Array de URLs de imagens originais
-    presskit: string;  // URL da foto do presskit do lançamento
-    webcast: string;  // URL da discussão de transmissão ao vivo do lançamento
-    youtube_id: string;  // ID do vídeo do YouTube relacionado ao lançamento
-    article: string;  // URL da discussão oficial do lançamento
-    wikipedia: string;  // URL da página da Wikipedia relacionada ao lançamento
-  
-  }
-  
+import { Model, DataTypes } from 'sequelize';
+import db from '.';
+import { Links, Reddit, Flickr } from '../../interfaces/LaunchesInterfaces';
 
 class Launch extends Model {
     public links !: Links /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */;
-    public reddit !: Reddit; /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */
+    public reddit !: Reddit; /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transm issão ao vivo, etc. */
     public flickr !: Flickr; /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */
     public tdb !: boolean; /* Um valor booleano que indica se a data de lançamento é "Para Ser Determinado" (To Be Determined). */
     public net !: boolean; /*  Indica se a data de lançamento é "No Earlier Than" (Não Antes de). Geralmente usado quando a data de lançamento é estimada, mas não confirmada. */
@@ -64,36 +35,36 @@ class Launch extends Model {
     static associate(models: any) {
         // Relação 1 para 1 com Rocket
         Launch.belongsTo(models.Rocket, {
-            foreignKey: "rocketId",
-            as: "rocket",
+            foreignKey: 'rocketId',
+            as: 'rocket',
         });
     
         // Relação muitos para muitos com Capsule
         Launch.belongsToMany(models.Capsule, {
-            through: "LaunchCapsules",
-            foreignKey: "launchId",
-            otherKey: "capsuleId",
-            as: "capsules",
+            through: 'LaunchCapsules',
+            foreignKey: 'launchId',
+            otherKey: 'capsuleId',
+            as: 'capsules',
         });
     
         // Relação muitos para 1 com Payload
         Launch.hasMany(models.Payload, {
-            foreignKey: "launchId",
-            as: "payloads",
+            foreignKey: 'launchId',
+            as: 'payloads',
         });
     
         // Relação 1 para muitos com LaunchPad
         Launch.belongsTo(models.LaunchPad, {
-            foreignKey: "launchPadId",
-            as: "launchPad",
+            foreignKey: 'launchPadId',
+            as: 'launchPad',
         });
     
         // Relação muitos para muitos com Core
         Launch.belongsToMany(models.Core, {
-            through: "LaunchCores",
-            foreignKey: "launchId",
-            otherKey: "coreId",
-            as: "cores",
+            through: 'LaunchCores',
+            foreignKey: 'launchId',
+            otherKey: 'coreId',
+            as: 'cores',
         });
     }
 }
@@ -117,19 +88,19 @@ Launch.init(
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-            field: "tdb",
+            field: 'tdb',
         },
         net: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-            field: "net",
+            field: 'net',
         },
         window: {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0,
-            field: "window",
+            field: 'window',
             validate: {
                 min: 0,
                 max: 24,
@@ -153,12 +124,12 @@ Launch.init(
             type: DataTypes.JSON,
             allowNull: false,
             defaultValue: [],
-            field: "failures",
+            field: 'failures',
         },
         details: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "details",
+            field: 'details',
         },
         crew: {
             type: DataTypes.JSON,
@@ -168,83 +139,83 @@ Launch.init(
             type: DataTypes.JSON,
             allowNull: false,
             defaultValue: [],
-            field: "cores",
+            field: 'cores',
         },
         ships: {
             type: DataTypes.JSON,
             allowNull: false,
             defaultValue: [],
-            field: "ships",
+            field: 'ships',
         },
         capsules: {
             type: DataTypes.JSON,
             allowNull: false,
             defaultValue: [],
-            field: "capsules",
+            field: 'capsules',
         },
         payloads: {
             type: DataTypes.JSON,
             allowNull: false,
             defaultValue: [],
-            field: "payloads",
+            field: 'payloads',
         },
         launchpad: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "launchpad",
+            field: 'launchpad',
         },
         upcoming: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-            field: "upcoming",
+            field: 'upcoming',
         },
         autoUpdate: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-            field: "auto-update",
+            field: 'auto-update',
         },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "name",
+            field: 'name',
         },           
         dateUtc: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "date_utc",
+            field: 'date_utc',
         },
         dateUnix: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            field: "date_unix",
+            field: 'date_unix',
         },
         dateLocal: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "date_local",
+            field: 'date_local',
         },
         datePrecision: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "date_precision",
+            field: 'date_precision',
         },
         dateTbd: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-            field: "date_tbd",
+            field: 'date_tbd',
         },
         dateTbdPrecision: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: "date_tbd_precision",
+            field: 'date_tbd_precision',
         },
         dateTbdWindow: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            field: "date_tbd_window",
+            field: 'date_tbd_window',
         },
         
         id: {
@@ -256,12 +227,12 @@ Launch.init(
     },
     {
         sequelize: db, // Conexão com o banco de dados
-        modelName: "Launch", 
-        tableName: "launchs", 
+        modelName: 'Launch', 
+        tableName: 'launchs', 
         freezeTableName: true, 
         underscored: true, 
         paranoid: true, 
-        charset: "utf8", // Charset da tabela (opcional)
+        charset: 'utf8', // Charset da tabela (opcional)
         timestamps: false, // Defina como false se não quiser adicionar colunas de timestamps
     }
 );
