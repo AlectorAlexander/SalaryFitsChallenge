@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -6,152 +6,152 @@ module.exports = {
       id: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
       },
       links: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: {},
+        defaultValue: {}
       },
       reddit: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: {},
+        defaultValue: {}
       },
       flickr: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: {},
+        defaultValue: {}
       },
       tdb: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
-        defaultValue: false,
+        defaultValue: false
       },
       net: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
-        defaultValue: false,
+        defaultValue: false
       },
       window: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        defaultValue: 0,
+        defaultValue: 0
       },
       rocket: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       success: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
-        defaultValue: false,
+        defaultValue: false
       },
       failures: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: [],
+        defaultValue: []
       },
       details: {
         type: Sequelize.TEXT,
         allowNull: true,
-        defaultValue: '',
+        defaultValue: ''
       },
       crew: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: [],
+        defaultValue: []
       },
       cores: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: [],
+        defaultValue: []
       },
       ships: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: [],
+        defaultValue: []
       },
       capsules: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: [],
+        defaultValue: []
       },
       payloads: {
         type: Sequelize.JSON,
         allowNull: true,
-        defaultValue: [],
+        defaultValue: []
       },
       launchpad: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: '',
+        defaultValue: ''
       },
       upcoming: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
-        defaultValue: false,
+        defaultValue: false
       },
       autoUpdate: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
         defaultValue: false,
-        field: 'auto_update',
+        field: 'auto_update'
       },
       name: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: '',
+        defaultValue: ''
       },
       date_utc: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: '',
+        defaultValue: ''
       },
       date_unix: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        defaultValue: 0,
+        defaultValue: 0
       },
       date_local: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: '',
+        defaultValue: ''
       },
       date_precision: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: '',
+        defaultValue: ''
       },
       date_tbd: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
-        defaultValue: false,
+        defaultValue: false
       },
       date_tbd_window: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        defaultValue: 0,
+        defaultValue: 0
       },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: true,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: true,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.fn('NOW')
       },
       deletedAt: {
         type: Sequelize.DATE,
         allowNull: true,
-        defaultValue: null,
-      },
-    });
+        defaultValue: null
+      }
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('launchs');
+    await queryInterface.dropTable('launchs')
   }
-};
+}

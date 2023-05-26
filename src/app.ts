@@ -1,40 +1,29 @@
-import * as express from 'express';
-import bp = require('body-parser');
-import launchRoutes from './routes/LaunchRoutes';
+import express, { Express } from 'express';
+import LaunchRoutes from './routes/LaunchRoutes';
 
 class App {
-  public app: express.Express;
+  private app: Express;
 
   constructor() {
     this.app = express();
-
     this.config();
-
-    // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.routes();
   }
 
-  private config():void {
-    const accessControl: express.RequestHandler = (_req, res, next) => {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
-      res.header('Access-Control-Allow-Headers', '*');
-      next();
-    };
-
+  private config(): void {
     this.app.use(express.json());
-    this.app.use(accessControl);
-    this.app.use(bp.json());
-    this.app.use(bp.urlencoded({ extended: true }));
-    this.app.use(launchRoutes);
+    this.app.use(express.urlencoded({ extended: true }));
   }
 
-  public start(PORT: string | number):void {
-    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+  private routes(): void {
+    this.app.use('/launches', LaunchRoutes);
+  }
+
+  public start(port: number): void {
+    this.app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
   }
 }
 
-export { App };
-
-// A execução dos testes de cobertura depende dessa exportação
-export const { app } = new App();
+export default App;

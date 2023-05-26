@@ -6,6 +6,7 @@
     "outDir": "./build",
     "rootDir": "./src",
     "strict": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "baseUrl": ".", 
     "forceConsistentCasingInFileNames": true,
@@ -18,6 +19,9 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/tests"]
+  "include": ["/**/*.ts"],
+  "exclude": ["src/tests", "node_modules"],
+  "ts-node": {
+    "esm": true
+  }, 
 }

@@ -1,4 +1,7 @@
+import "dotenv/config";
 import { Sequelize } from "sequelize";
-import config from "../config/sequelize.config";
+const config = require("../config/sequelize.config");
 
-export default new Sequelize(config);
+const sequelize = new Sequelize(config[process.env.NODE_ENV || 'development']);
+
+export default sequelize;

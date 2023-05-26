@@ -1,12 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = exports.App = void 0;
-const express = require("express");
+const express_1 = __importDefault(require("express"));
 const bp = require("body-parser");
-const LaunchRoutes_1 = require("./routes/LaunchRoutes");
+const LaunchRoutes_1 = __importDefault(require("./routes/LaunchRoutes"));
 class App {
     constructor() {
-        this.app = express();
+        this.app = (0, express_1.default)();
         this.config();
         // Não remover essa rota
         this.app.get('/', (req, res) => res.json({ ok: true }));
@@ -18,7 +21,7 @@ class App {
             res.header('Access-Control-Allow-Headers', '*');
             next();
         };
-        this.app.use(express.json());
+        this.app.use(express_1.default.json());
         this.app.use(accessControl);
         this.app.use(bp.json());
         this.app.use(bp.urlencoded({ extended: true }));

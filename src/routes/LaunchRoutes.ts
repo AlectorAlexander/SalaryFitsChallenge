@@ -6,7 +6,7 @@ const launchController = new LaunchController();
 
 launchRoutes.post('/', launchController.createLaunch);
 
-launchRoutes.get('/launches', launchController.getAllLaunchs);
+launchRoutes.get('/', launchController.getAllLaunchs);
 
 launchRoutes.get('/:id', launchController.getLaunchById);
 

@@ -174,7 +174,7 @@ Launch.init(
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-            field: 'auto-update',
+            field: 'auto_update',
         },
         name: {
             type: DataTypes.STRING,
@@ -206,11 +206,6 @@ Launch.init(
             allowNull: false,
             defaultValue: false,
             field: 'date_tbd',
-        },
-        dateTbdPrecision: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            field: 'date_tbd_precision',
         },
         dateTbdWindow: {
             type: DataTypes.INTEGER,

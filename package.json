@@ -5,10 +5,12 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "migrate": "npx sequelize-cli db:migrate --config sequelize.config.js",
-    "migrate:reset": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "create-db": "sequelize db:create",
+    "migrate": "sequelize db:create && npx sequelize-cli db:migrate --config src/database/config/sequelize.config.ts",
+    "migrate:reset": "sequelize db:create && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "build": "tsc",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +22,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.3.2",
     "sequelize": "^6.31.1",
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.3.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
