@@ -6,6 +6,11 @@ class LaunchService {
     return launch;
   }
 
+  public async getAllLaunchs(): Promise<Launch[]> {
+    const launches = await Launch.findAll();
+    return launches;
+  }
+
   public async getLaunchById(id: string): Promise<Launch | null> {
     const launch = await Launch.findByPk(id);
     return launch;

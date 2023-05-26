@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
-import { Links, Reddit, Flickr } from '../../interfaces/LaunchesInterfaces';
+import { Links, Reddit, Flickr } from '../../interfaces/LaunchesInterfaces'
 
 class Launch extends Model {
     public links !: Links /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */;

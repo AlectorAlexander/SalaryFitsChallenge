@@ -2,16 +2,26 @@ import { Request, Response } from 'express';
 import LaunchService from '../services/LaunchServices';
 
 class LaunchController {
-  private launchService: LaunchService;
+  private launchServices: LaunchService;
 
   constructor() {
-    this.launchService = new LaunchService();
+    this.launchServices = new LaunchService();
+  }
+
+  public async getAllLaunchs(req: Request, res: Response): Promise<void> {
+    try {
+      const launches = await this.launchServices.getAllLaunchs();
+      res.json(launches);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 
   public createLaunch = async (req: Request, res: Response): Promise<void> => {
     try {
       const launchData = req.body;
-      const launch = await this.launchService.createLaunch(launchData);
+      const launch = await this.launchServices.createLaunch(launchData);
       res.status(201).json(launch);
     } catch (error) {
       res.status(500).json({ error: 'Failed to create launch' });
@@ -21,7 +31,7 @@ class LaunchController {
   public getLaunchById = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
-      const launch = await this.launchService.getLaunchById(id);
+      const launch = await this.launchServices.getLaunchById(id);
       if (launch) {
         res.json(launch);
       } else {
@@ -36,7 +46,7 @@ class LaunchController {
     try {
       const { id } = req.params;
       const updatedData = req.body;
-      const updatedLaunch = await this.launchService.updateLaunch(id, updatedData);
+      const updatedLaunch = await this.launchServices.updateLaunch(id, updatedData);
       if (updatedLaunch) {
         res.json(updatedLaunch);
       } else {
@@ -50,7 +60,7 @@ class LaunchController {
   public deleteLaunch = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
-      const deleted = await this.launchService.deleteLaunch(id);
+      const deleted = await this.launchServices.deleteLaunch(id);
       if (deleted) {
         res.json({ success: true });
       } else {
