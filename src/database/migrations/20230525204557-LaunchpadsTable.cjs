@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -6,81 +6,81 @@ module.exports = {
       id: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       full_name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       locality: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       region: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       timezone: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       latitude: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: false
       },
       longitude: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: false
       },
       launch_attempts: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0,
+        defaultValue: 0
       },
       launch_successes: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0,
+        defaultValue: 0
       },
       rockets: {
         type: Sequelize.JSON,
         allowNull: false,
-        defaultValue: '',
+        defaultValue: ''
       },
       launches: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: '',
+        defaultValue: ''
       },
       status: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: false
       },
       details: {
         type: Sequelize.TEXT,
         allowNull: false,
-        defaultValue: '',
+        defaultValue: ''
       },
       createdAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
       updatedAt: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
       deletedAt: {
         type: Sequelize.DATE,
-        allowNull: true,
-      },
-    });
+        allowNull: true
+      }
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('launchpads');
+    await queryInterface.dropTable('launchpads')
   }
-};
+}

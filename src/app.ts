@@ -2,7 +2,8 @@ import express, { Express } from 'express';
 import LaunchRoutes from './routes/LaunchRoutes';
 import capsulesRoutes from './routes/CapsuleRoutes';
 import coresRoutes from './routes/CoresRoutes';
-import launchpadsRoutes from './routes/Launchpads';
+import launchpadsRoutes from './routes/LaunchpadsRoutes';
+import payloadsRoutes from './routes/PayloadRoutes';
 
 class App {
   private app: Express;
@@ -23,6 +24,7 @@ class App {
     this.app.use('/capsules', capsulesRoutes);
     this.app.use('/cores', coresRoutes);
     this.app.use('/launchpads', launchpadsRoutes);
+    this.app.use('/payloads', payloadsRoutes);
   }
 
   public start(port: number): void {
