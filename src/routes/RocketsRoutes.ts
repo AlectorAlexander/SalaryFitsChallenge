@@ -9,5 +9,7 @@ rocketsRoutes.get('/', rocketController.getAllRockets);
 
 rocketsRoutes.get('/:id', rocketController.getRocketById);
 
+rocketsRoutes.get('/name/:name', rocketController.getRocketByName);
+
 
 export default rocketsRoutes;

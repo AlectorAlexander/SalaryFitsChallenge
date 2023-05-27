@@ -48,6 +48,29 @@ class RocketsController {
     }
     
   }
+
+  public getRocketByName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { name } = req.params;
+      const newName = name.replace('_', ' ').toUpperCase() as string 
+      console.log(newName);
+      
+
+      const rocket = await this.rocketsService.getRocketByName(newName);
+      if (rocket) {
+        res.status(200).json(rocket);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
+  
 }
 
 export default RocketsController;
