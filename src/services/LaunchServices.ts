@@ -62,55 +62,93 @@ class LaunchService {
       }
     }
     
-    
-    
-    
-    public async getLaunchsByPayloadId(payloadId: string[]): Promise<Launch[] | null> {
-      const launchs = await Launch.findAll({
-        where: {
-          payloads: {
-            [Op.contains]: payloadId,
+    public async getLaunchsByPayloadId(payloadId: string): Promise<Launch[] | null> {
+      try {
+        const launchs = await Launch.findAll({
+          where: {
+            payloads: {
+              [Op.like]: [`%${payloadId}%`],
+            },
           },
-        },
-        order: [['dateUnix', 'ASC']],
-      });
-    
-      return launchs;
-    }
-
-    public async getLaunchsByLaunchpadId(launchpadIds: string[]): Promise<Launch[] | null> {
-      const launchs = await Launch.findAll({
-        where: {
-          launchpad: launchpadIds,
-        },
-        order: [['dateUnix', 'ASC']],
-      });
-    
-      return launchs;
-    }
-    
-    public async getLaunchsByLaunchpadName(launchpadName: string): Promise<Launch[] | null> {
-      const launchpadService = new LaunchpadService();
-      const launchpads = await launchpadService.getLaunchpadByName(launchpadName);
-    
-      if (!launchpads || launchpads.length === 0) {
+          order: [['dateUnix', 'ASC']],
+        });
+        return launchs || null;
+      } catch (error) {
+        console.error('Error in getLaunchsByPayloadId:', error);
         return null;
       }
+    }
     
-      const launchpadIds = launchpads.map((launchpad) => launchpad.id);
-      const launchs = await this.getLaunchsByLaunchpadId(launchpadIds);
-      return launchs;
+    public async getLaunchsByLaunchpadId(launchpadId: string): Promise<Launch[] | null> {
+      try {
+        const launchs = await Launch.findAll({
+          where: {
+            launchpad: {
+              [Op.like]: `%${launchpadId}%`,
+          },
+        },
+          order: [['dateUnix', 'ASC']],
+        });
+        return launchs || null;
+      } catch (error) {
+        console.error('Error in getLaunchsByLaunchpadId:', error);
+        return null;
+      }
     }
 
-    public async getLaunchesByCoreId(coreId: string): Promise<Launch[] | null> {
-      const launches = await Launch.findAll();
-    
-      const filteredLaunches = launches.filter((launch) =>
-        launch.cores.find((core) => core.core === coreId)
-      );
-    
-      return filteredLaunches;
+    public async getLaunchesByRocketId(rocketId: string): Promise<Launch[] | null> {
+      try {
+        const launchs = await Launch.findAll({
+          where: {
+            rocket: {
+              [Op.like]: `%${rocketId}%`,
+          },
+        },
+          order: [['dateUnix', 'ASC']],
+        });
+        return launchs || null;
+      }
+      catch (error) {
+        console.error('Error in getLaunchesByRocketId:', error);
+        return null;
+      }
     }
+
+    
+    public async getLaunchsByLaunchpadName(launchpadName: string): Promise<Launch[] | null> {
+      try {
+        console.log(launchpadName);
+        const launchpadService = new LaunchpadService();
+        const launchpads = await launchpadService.getLaunchpadByName(launchpadName);
+    
+        if (!launchpads || launchpads.length === 0) {
+          return null;
+        }
+    
+        const launchpadIds = launchpads.map((launchpad) => launchpad.id);
+        const launchs: (Launch[] | null)[] = await Promise.all(
+          launchpadIds.map((launchpadId) => this.getLaunchsByLaunchpadId(launchpadId))
+        );
+        return launchs.flat().filter((launch) => launch !== null) as Launch[] || null;
+      } catch (error) {
+        console.error('Error in getLaunchsByLaunchpadName:', error);
+        return null;
+      }
+    }
+    
+    public async getLaunchesByCoreId(coreId: string): Promise<Launch[] | null> {
+      try {
+        const launches = await Launch.findAll();
+        const filteredLaunches = launches.filter((launch) =>
+          launch.cores.find((core) => core.core === coreId)
+        );
+        return filteredLaunches || null;
+      } catch (error) {
+        console.error('Error in getLaunchesByCoreId:', error);
+        return null;
+      }
+    }
+    
 
     public async getLaunchesByTimePeriod(startYear: number, endYear: number): Promise<Launch[] | null> {
       const launches = await Launch.findAll();
@@ -122,6 +160,9 @@ class LaunchService {
     
       return filteredLaunches;
     }
+
+
+    
     
     
   }    

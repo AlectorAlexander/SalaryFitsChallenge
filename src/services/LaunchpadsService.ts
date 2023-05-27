@@ -15,16 +15,22 @@ class LaunchpadService {
 
 
   public async getLaunchpadByName(name: string): Promise<Launchpads[] | null> {
-    const launchpads = await Launchpads.findAll({ 
-      where: { 
-        name: {
-          [Op.iLike]: `%${name}%`,
+    try {
+      const launchpads = await Launchpads.findAll({
+        where: {
+          name: {
+            [Op.like]: `%${name}%`,
+          },
         },
-      },
-    });
+      });
   
-    return launchpads;
+      return launchpads;
+    } catch (error) {
+      console.error('Error in getLaunchpadByName:', error);
+      return null;
+    }
   }
+  
   
 
 }

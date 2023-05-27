@@ -87,8 +87,8 @@ class LaunchController {
   //get Launchs By Payload ID
   public getLaunchsByPayloadId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { payload_id } = req.params;
-      const launchs = await this.launchService.getLaunchsByPayloadId([payload_id]);
+      const { id } = req.params;
+      const launchs = await this.launchService.getLaunchsByPayloadId(id);
       if (launchs && launchs.length > 0) {
         res.status(200).json(launchs);
       } 
@@ -107,8 +107,8 @@ class LaunchController {
   //get Launchs By PayloadID
    public getLaunchsByPayloadtId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { payload_id } = req.params;
-      const launchs = await this.launchService.getLaunchsByPayloadId([payload_id]);
+      const { id } = req.params;
+      const launchs = await this.launchService.getLaunchsByPayloadId(id);
       if (launchs && launchs.length > 0) {
         res.status(200).json(launchs);
       } 
@@ -127,8 +127,8 @@ class LaunchController {
   //get Launchs By Launchpad ID
    public getLaunchsByLaunchpadId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { launchpad_id } = req.params;
-      const launchs = await this.launchService.getLaunchsByLaunchpadId([launchpad_id]);
+      const { id } = req.params;
+      const launchs = await this.launchService.getLaunchsByLaunchpadId(id);
       if (launchs && launchs.length > 0) {
         res.status(200).json(launchs);
       } 
@@ -147,8 +147,8 @@ class LaunchController {
   //get Launchs By Launchpad Name
    public getLaunchsByLaunchpadName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { launchpad_name } = req.params;
-      const launchpadName = launchpad_name.replace(/_/g, ' ').toUpperCase() as string 
+      const { name } = req.params;
+      const launchpadName = name.replace(/_/g, ' ').toUpperCase() as string 
       const launchs = await this.launchService.getLaunchsByLaunchpadName(launchpadName);
       if (launchs && launchs.length > 0) {
         res.status(200).json(launchs);
@@ -163,6 +163,25 @@ class LaunchController {
       const message = 'Failed to fetch launches';
       next({ message, error });
     
+    }
+  }
+
+  public getLaunchesByRocketId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const launchs = await this.launchService.getLaunchesByRocketId(id);
+      if (launchs && launchs.length > 0) {
+        res.status(200).json(launchs);
+      } 
+      else {
+        const status = 404;
+        const message = 'Launches not found';
+        next({ status, message });
+      }
+    }
+    catch (error) {
+      const message = 'Failed to fetch launches';
+      next({ message, error });
     }
   }
 

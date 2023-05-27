@@ -23,7 +23,7 @@ launchRoutes.get('/capsule/:id', launchController.getLaunchsByCapsuleId);
 launchRoutes.get('/payload/:id', launchController.getLaunchsByPayloadId);
 
 // Rotas relacionadas a foguetes
-launchRoutes.get('/rocket/:id', launchController.getLaunchsByPayloadId);
+launchRoutes.get('/rocket/:id', launchController.getLaunchesByRocketId);
 
 // Rotas relacionadas a locais de lançamento
 launchRoutes.get('/launchpad/:id', launchController.getLaunchsByLaunchpadId);
