@@ -20,7 +20,6 @@ class LaunchController {
     try {
       const { id } = req.params;
       const launch = await this.launchService.getLaunchById(id);
-    console.log(launch);
     if (launch) {
         res.json(launch);
       } else {
@@ -32,7 +31,44 @@ class LaunchController {
     }
   };
 
+  public getLaunchsSuccess = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const launchs = await this.launchService.getRocketsSuccess();
+      if (launchs && launchs.length > 0) {
+        res.status(200).json(launchs);
+      } 
+      else {
+        const status = 404;
+        const message = 'Launches not found';
+        next({ status, message });
+      }
+    } catch (error) {
+      const message = 'Failed to fetch launches';
+      next({ message, error });
+    }
+  }
+
+  public getLaunchsFailure = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const launchs = await this.launchService.getRocketsFailure();
+      if (launchs && launchs.length > 0) {
+        res.status(200).json(launchs);
+      } 
+      else {
+        const status = 404;
+        const message = 'Launches not found';
+        next({ status, message });
+      }
+    } catch (error) {
+      const message = 'Failed to fetch launches';
+      next({ message, error });
+    }
+  }
 
 }
+
+
+
+
 
 export default LaunchController;

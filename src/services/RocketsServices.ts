@@ -37,5 +37,34 @@ class RocketsService {
     const rocket = await Rocket.findByPk(launch.rocket)
     return rocket
   }
+
+  public  async getRocketsSuccess (): Promise<Rocket[] | null> {
+    const launchService = new LaunchService()
+    const launch = await launchService.getRocketsSuccess()
+    if (!launch || launch.length === 0) {
+      return null
+  }
+    const rockets = await Rocket.findAll({
+      where: {
+        id: launch.map(launch => launch.rocket)
+      }
+    })
+    return rockets
+}
+
+public async getRocketsFailure (): Promise<Rocket[] | null> {
+  const launchService = new LaunchService()
+  const launch = await launchService.getRocketsFailure()
+  if (!launch) {
+    return null
+  }
+  const rockets = await Rocket.findAll({
+    where: {
+      id: launch.map(launch => launch.rocket)
+    }})
+    return rockets
+  }
+
+
 }
 export default RocketsService;

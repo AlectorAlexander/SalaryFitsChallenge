@@ -9,6 +9,10 @@ launchRoutes.get('/', launchController.getAllLaunchs);
 
 launchRoutes.get('/:id', launchController.getLaunchById);
 
+launchRoutes.get('/success', launchController.getLaunchsSuccess);
+
+launchRoutes.get('/failure', launchController.getLaunchsFailure);
+
 /* launchRoutes.get('/:id/comments', launchController.getCommentsByLaunchId); */
 
 

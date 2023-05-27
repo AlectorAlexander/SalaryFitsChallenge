@@ -20,7 +20,6 @@ class RocketsController {
     try {
       const { id } = req.params;
       const rocket = await this.rocketsService.getRocketById(id);
-    console.log(rocket);
     if (rocket) {
         res.json(rocket);
       } else {
@@ -111,6 +110,40 @@ class RocketsController {
       return next({ message });
     }
 
+  }
+
+  public getRocketsSuccess = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const rockets = await this.rocketsService.getRocketsSuccess();
+      if (rockets) {
+        res.status(200).json(rockets);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
+
+  public getRocketsFailure = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const rockets = await this.rocketsService.getRocketsFailure();
+      if (rockets) {
+        res.status(200).json(rockets);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
   }
 
 }

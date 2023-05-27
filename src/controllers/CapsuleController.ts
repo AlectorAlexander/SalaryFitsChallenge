@@ -20,7 +20,6 @@ class CapsulesController {
     try {
       const { id } = req.params;
       const capsule = await this.capsulesService.getCapsuleById(id);
-    console.log(capsule);
     if (capsule) {
         res.json(capsule);
       } else {

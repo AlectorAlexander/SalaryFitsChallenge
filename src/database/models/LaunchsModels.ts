@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
-import { Links, Reddit, Flickr } from '../../interfaces/LaunchesInterfaces'
+import { Links, Reddit, Flickr, Core } from '../../interfaces/LaunchesInterfaces'
 
 class Launch extends Model {
     public links !: Links /*  Contém vários links relacionados ao lançamento, como links para imagens, páginas de mídia social, documentos de imprensa, transmissão ao vivo, etc. */;
@@ -9,7 +9,7 @@ class Launch extends Model {
     public tdb !: boolean; /* Um valor booleano que indica se a data de lançamento é "Para Ser Determinado" (To Be Determined). */
     public net !: boolean; /*  Indica se a data de lançamento é "No Earlier Than" (Não Antes de). Geralmente usado quando a data de lançamento é estimada, mas não confirmada. */
     public window !: number; /*  Indica o período de tempo que o lançamento está disponível para ser lançado. */
-    public rocket !: string; /* Uma matriz vazia ou contendo informações sobre quaisquer falhas ocorridas durante o lançamento. */
+    public rocket !: string; /*id do foguete */
     public success !: boolean; /* Um valor booleano que indica se o lançamento foi bem-sucedido. */
     public failures !: object[]; /* Uma matriz vazia ou contendo informaçães sobre quaisquer falhas ocorridas durante o lançamento. */
     public details !: string; /*  Fornece detalhes adicionais sobre o lançamento, como sua finalidade, carga útil, local de lançamento, etc */
@@ -19,7 +19,7 @@ class Launch extends Model {
     public payloads !: string[]; /* Lista de IDs das cargas úteis envolvidas no lançamento. */
     public launchpad !: string; /*  O ID do local de lançamento */
     public upcoming !: boolean; // Se o valor de "upcoming" for true, significa que o lançamento é futuro e ainda não aconteceu. Se for false, indica que o lançamento já ocorreu ou está em andamento.
-    public cores !: object[]; // representa as informações relacionadas aos núcleos dos foguetes usados no lançamento. Cada objeto dentro do campo "cores" representa um núcleo específico.
+    public cores !: Core[]; // representa as informações relacionadas aos núcleos dos foguetes usados no lançamento. Cada objeto dentro do campo "cores" representa um núcleo específico.
 
     public autoUpdate !:  boolean; // Um valor booleano que indica se os detalhes do lançamento são atualizados automaticamente.
     public name !:  string; // Nome do lançamento

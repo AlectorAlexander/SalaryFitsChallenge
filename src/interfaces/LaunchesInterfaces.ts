@@ -23,4 +23,16 @@ export interface Patch {
     article: string;
     wikipedia: string;
   }
+
+  export interface Core {
+    core: string;
+    legs: boolean;
+    flight: number;
+    reused: boolean;
+    landpad: string | null;
+    gridfins: boolean;
+    landing_type: string | null;
+    landing_attempt: boolean;
+    landing_success: boolean | null;
+  }
   
