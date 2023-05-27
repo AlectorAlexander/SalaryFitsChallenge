@@ -89,7 +89,7 @@ describe('Launch Routes', () => {
   
 
     // A launchpad VAFB SLC 3W possui o ID declarado abaixo, sendo assim, verificamos se algum lançamento do VAFB SLC 3W foi encontrado.
-    const launchpadIdToFind = "5e9e4501f509094ba4566f84";
+    const launchpadIdToFind = "5e9e4502f509092b78566f87";
   
     const launchpadFound = response.data.some((launch) => {
       return launch.launchpad === launchpadIdToFind;
@@ -100,7 +100,7 @@ describe('Launch Routes', () => {
   
 
   it('GET /launches/core/:id should return launches by core ID', async () => {
-    const response: AxiosResponse = await axiosInstance.get('/launches/core/5eb87cd9ffd86e000604b32a'); // Substitua pelo ID válido
+    const response: AxiosResponse = await axiosInstance.get('/launches/core/5e9e289df35918033d3b2623');
 
     expect(response.status).toBe(200);
     expect(Array.isArray(response.data)).toBe(true);
@@ -108,8 +108,8 @@ describe('Launch Routes', () => {
 
   it('POST /launches/time should return launches within a time period', async () => {
     const response: AxiosResponse = await axiosInstance.post('/launches/time', {
-      startTime: '2012-01-01',
-      endTime: '2019-12-31',
+      start_date: '2012',
+      end_date: '2019',
     });
 
     expect(response.status).toBe(200);

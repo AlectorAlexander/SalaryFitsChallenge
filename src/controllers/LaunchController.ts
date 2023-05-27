@@ -188,8 +188,8 @@ class LaunchController {
   //get Launchs By Core Id
    public getLaunchsByCoreId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { core_id } = req.params;
-      const launchs = await this.launchService.getLaunchesByCoreId(core_id);
+      const { id } = req.params;
+      const launchs = await this.launchService.getLaunchesByCoreId(id);
       if (launchs && launchs.length > 0) {
         res.status(200).json(launchs);
       } 
