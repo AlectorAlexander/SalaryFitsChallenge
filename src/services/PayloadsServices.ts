@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Payload from "../database/models/PayloadsModels";
 
 class PayloadsService {
@@ -11,6 +12,43 @@ class PayloadsService {
     const payload = await Payload.findByPk(id);
     return payload;
   }
+
+  public async getPayloadByName(name: string): Promise<Payload[] | null> {
+    try {
+      const payloads = await Payload.findAll({
+        where: {
+          name: {
+            [Op.like]: `%${name}%`,
+          },
+        },
+      });
+  
+      return payloads;
+    } catch (error) {
+      console.error('Error in getLaunchpadByName:', error);
+      return null;
+    }
+  }
+
+  public async getPayloadByType(type: string): Promise<Payload[] | null> {
+    try {
+      const payloads = await Payload.findAll({
+        where: {
+          type: {
+            [Op.like]: `%${type}%`,
+          },
+        },
+      });
+  
+      return payloads;
+    } catch (error) {
+      console.error('Error in getLaunchpadByName:', error);
+      return null;
+    }
+  }
+  
+  
+ 
 
 }
 

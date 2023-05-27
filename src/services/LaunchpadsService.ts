@@ -29,8 +29,6 @@ class LaunchpadService {
       console.error('Error in getLaunchpadByName:', error);
       return null;
     }
-    
-
   }
   
   public async getLaunchpadByLocality(locality: string): Promise<Launchpads[] | null> {

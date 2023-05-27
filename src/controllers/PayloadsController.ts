@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import PayloadsService from '../services/PayloadsServices';
 
 
@@ -30,6 +30,47 @@ class PayloadsController {
       res.status(500).json({ error: 'Failed to fetch payload' });
     }
   };
-}
+
+  public getPayloadByName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { name } = req.params;
+      const newName = name.replace(/_/g, ' ').toUpperCase() as string
+      const payload = await this.payloadsService.getPayloadByName(newName);
+      if (payload) {
+        res.status(200).json(payload);
+      } else {
+        const status =  404;
+        const message = 'Payload not found';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.log(error);
+      
+      next(error);
+    }
+  }
+
+  public getPayloadByType = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { type } = req.params;
+      const payload = await this.payloadsService.getPayloadByType(type);
+      if (payload) {
+        res.status(200).json(payload);
+      } else {
+        const status =  404;
+        const message = 'Payload not found';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.log(error);
+      
+      next(error);
+    }
+  }
+
+  
+
+  }
+
 
 export default PayloadsController;

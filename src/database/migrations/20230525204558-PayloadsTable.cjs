@@ -29,7 +29,7 @@ module.exports = {
         allowNull: true
       },
       customers: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true,
         defaultValue: '[]',
         get () {
@@ -41,7 +41,7 @@ module.exports = {
         }
       },
       norad_ids: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true,
         defaultValue: '[]',
         get () {
@@ -53,7 +53,7 @@ module.exports = {
         }
       },
       nationalities: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true,
         defaultValue: '[]',
         get () {
@@ -65,7 +65,7 @@ module.exports = {
         }
       },
       manufacturers: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true,
         defaultValue: '[]',
         get () {
