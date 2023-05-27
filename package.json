@@ -10,7 +10,8 @@
     "migrate:reset": "sequelize db:create && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "build": "tsc",
     "start": "node build/index.js",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "setup": "npm install && npm run migrate:reset && npm run dev"
   },
   "keywords": [],
   "author": "",
