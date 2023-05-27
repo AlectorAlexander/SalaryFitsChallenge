@@ -16,17 +16,33 @@ describe('Capsules Routes', () => {
 
     expect(response.status).toBe(200);
     expect(Array.isArray(response.data)).toBe(true);
-    expect(response.data.length).toBeGreaterThan(0); // Verifica se a matriz não está vazia
-
-    // Verifica se cada elemento da matriz é do tipo Capsule
+    expect(response.data.length).toBeGreaterThan(0); 
   });
 
-  it('GET /capsules/pickup should return capsules by times used', async () => {
-    const response: AxiosResponse<Capsule> = await axiosInstance.get('/capsules/pickup');
-
+  it('GET /capsules/pickup should return capsules by times used in descending order', async () => {
+    const response: AxiosResponse<Capsule[]> = await axiosInstance.get('/capsules/pickup');
+  
     expect(response.status).toBe(200);
-    expect(response.data).toHaveProperty('reuse_count');
+    expect(Array.isArray(response.data)).toBe(true);
+  
+    const capsules = response.data;
+  
+    expect(capsules.length).toBeGreaterThan(0);
+  
+    for (let i = 0; i < capsules.length - 1; i++) {
+      const currentCapsule = capsules[i];
+      const nextCapsule = capsules[i + 1];
+  
+      expect(currentCapsule).toHaveProperty('reuse_count');
+      expect(nextCapsule).toHaveProperty('reuse_count');
+  
+      const currentReuseCount = currentCapsule.reuse_count;
+      const nextReuseCount = nextCapsule.reuse_count;
+  
+      expect(currentReuseCount).toBeGreaterThanOrEqual(nextReuseCount);
+    }
   });
+  
 
   it('GET /capsules/:id should return a specific capsule', async () => {
     const response: AxiosResponse<Capsule> = await axiosInstance.get('/capsules/5e9e2c5bf35918ed873b2664');
