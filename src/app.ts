@@ -5,6 +5,7 @@ import coresRoutes from './routes/CoresRoutes';
 import launchpadsRoutes from './routes/LaunchpadsRoutes';
 import payloadsRoutes from './routes/PayloadRoutes';
 import rocketsRoutes from './routes/RocketsRoutes';
+import error from './middlewares/errorMiddleware';
 
 class App {
   private app: Express;
@@ -27,6 +28,7 @@ class App {
     this.app.use('/launchpads', launchpadsRoutes);
     this.app.use('/payloads', payloadsRoutes);
     this.app.use('/rockets', rocketsRoutes);
+    this.app.use(error);
   }
 
   public start(port: number): void {

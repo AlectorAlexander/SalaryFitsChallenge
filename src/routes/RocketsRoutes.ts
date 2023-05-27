@@ -4,8 +4,10 @@ import RocketsController from '../controllers/RocketsController';
 const rocketsRoutes = Router();
 const rocketController = new RocketsController();
 
+rocketsRoutes.get('/spaceSearch', rocketController.getRocketPending)
 rocketsRoutes.get('/', rocketController.getAllRockets);
 
 rocketsRoutes.get('/:id', rocketController.getRocketById);
+
 
 export default rocketsRoutes;

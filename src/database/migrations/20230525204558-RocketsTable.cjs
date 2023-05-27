@@ -9,39 +9,39 @@ module.exports = {
         allowNull: false
       },
       height: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       diameter: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       mass: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       first_stage: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       second_stage: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       engines: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       landing_legs: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       payload_weights: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       flickr_images: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSON,
         allowNull: true
       },
       name: {

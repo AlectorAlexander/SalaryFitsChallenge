@@ -108,10 +108,11 @@ module.exports = {
         allowNull: true,
         defaultValue: ''
       },
-      date_unix: {
+      dateUnix: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
+        field: 'date_unix'
       },
       date_local: {
         type: Sequelize.STRING,

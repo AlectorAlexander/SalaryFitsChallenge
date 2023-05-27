@@ -1,10 +1,6 @@
 import Launch from "../database/models/LaunchsModels";
 
 class LaunchService {
-  public async createLaunch(data: any): Promise<Launch> {
-    const launch = await Launch.create(data);
-    return launch;
-  }
 
   public async getAllLaunchs(): Promise<Launch[]> {
     const launches = await Launch.findAll();
@@ -24,12 +20,16 @@ class LaunchService {
     return updatedLaunch;
   }
 
-  public async deleteLaunch(id: string): Promise<boolean> {
-    const deletedRowsCount = await Launch.destroy({
-      where: { id },
-    });
-    return deletedRowsCount > 0;
-  }
+  public async getRocketPending (): Promise<Launch | null> {
+    const launchs = await Launch.findAll({
+      where: {
+        upcoming: true,
+      },
+      order: [['dateUnix', 'ASC']],
+      limit: 1,
+      })
+      return launchs[0];
+}
 }
 
 export default LaunchService;

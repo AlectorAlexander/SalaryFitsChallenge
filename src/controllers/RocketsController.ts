@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import RocketsService from '../services/RocketsServices';
 
 
@@ -31,6 +31,23 @@ class RocketsController {
       res.status(500).json({ error: 'Failed to fetch rocket' });
     }
   };
+   public getRocketPending = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const rocket = await this.rocketsService.getRocketPending();
+      if (rocket) {
+      res.status(200).json(rocket);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete pendente encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message })
+    }
+    
+  }
 }
 
 export default RocketsController;
