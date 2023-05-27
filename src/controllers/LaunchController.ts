@@ -19,6 +19,7 @@ class LaunchController {
   public getLaunchById = async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
+      
       const launch = await this.launchService.getLaunchById(id);
     if (launch) {
         res.json(launch);
@@ -68,8 +69,8 @@ class LaunchController {
   //get Launchs By CapsuleID
   public getLaunchsByCapsuleId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { capsule_id } = req.params;
-      const launchs = await this.launchService.getLaunchsByCapsuleId([capsule_id]);
+      const { id } = req.params;
+      const launchs = await this.launchService.getLaunchsByCapsuleId(id);
       if (launchs && launchs.length > 0) {
         res.status(200).json(launchs);
       } 

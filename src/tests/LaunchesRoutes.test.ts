@@ -1,87 +1,118 @@
-import request from 'supertest';
-import { describe, test } from '@jest/globals';
-const app = require('../app');
-
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import app from '../app';
+import Launch from '../database/models/LaunchsModels';
 
 describe('Launch Routes', () => {
-  test('GET /launches should return all launches', async () => {
-    const response = await request(app).get('/launches')
+  let axiosInstance: AxiosInstance;
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  beforeAll(() => {
+    axiosInstance = axios.create({
+      baseURL: 'http://localhost:3001', // Substitua pela URL correta do seu servidor Express
+    });
+  });
 
-  test('GET /launches/:id should return a specific launch', async () => {
-    const response = await request(app).get('/launches/123') // Substitua pelo ID válido
+  it('GET /launches should return all launches', async () => {
+    const response: AxiosResponse<Launch[]> = await axiosInstance.get('/launches');
 
-    expect(response.status).toBe(200)
-    expect(response.body).toHaveProperty('launch')
-  })
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+    expect(response.data.length).toBeGreaterThan(0); // Verifica se a matriz não está vazia
 
-  test('GET /launches/success should return successful launches', async () => {
-    const response = await request(app).get('/launches/success')
+    // Verifica se cada elemento da matriz é do tipo Launch
+  });
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('GET /launches/:id should return a specific launch', async () => {
+    const response: AxiosResponse<Launch> = await axiosInstance.get('/launches/5eb87cd9ffd86e000604b32a');
+  
+    expect(response.status).toBe(200);
+  });
+  
 
-  test('GET /launches/failure should return failed launches', async () => {
-    const response = await request(app).get('/launches/failure')
+  it('GET /launches/success should return successful launches', async () => {
+    const response: AxiosResponse<Launch[]> = await axiosInstance.get('/launches/flightconference/success');
+  
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  
+    // Verifica se a chave 'success' de cada lançamento é verdadeira
+    response.data.forEach((launch) => {
+      expect(launch.success).toBe(true);
+    });
+  });
+  
+  it('GET /launches/failure should return failed launches', async () => {
+    const response: AxiosResponse<Launch[]> = await axiosInstance.get('/launches/flightconference/failure');
+  
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  
+    // Verifica se a chave 'success' de cada lançamento é falsa
+    response.data.forEach((launch) => {
+      expect(launch.success).toBe(false);
+    });
+  });
+  
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('GET /launches/capsule/:id should return launches by capsule ID', async () => {
+    const response: AxiosResponse = await axiosInstance.get('/launches/capsule/5e9e2c5bf3591835983b2666'); 
 
-  test('GET /launches/capsule/:id should return launches by capsule ID', async () => {
-    const response = await request(app).get('/launches/capsule/456') // Substitua pelo ID válido
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  });
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('GET /launches/payload/:id should return launches by payload ID', async () => {
+    const response: AxiosResponse = await axiosInstance.get('/launches/payload/5eb0e4b5b6c3bb0006eeb1e1');
 
-  test('GET /launches/payload/:id should return launches by payload ID', async () => {
-    const response = await request(app).get('/launches/payload/789') // Substitua pelo ID válido
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  });
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('GET /launches/rocket/:id should return launches by rocket ID', async () => {
+    const response: AxiosResponse = await axiosInstance.get('/launches/rocket/5e9d0d95eda69955f709d1eb'); // Substitua pelo ID válido
 
-  test('GET /launches/rocket/:id should return launches by rocket ID', async () => {
-    const response = await request(app).get('/launches/rocket/123') // Substitua pelo ID válido
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  });
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('GET /launches/launchpad/:id should return launches by launchpad ID', async () => {
+    const response: AxiosResponse = await axiosInstance.get('/launches/launchpad/5e9d0d95eda69955f709d1eb'); // Substitua pelo ID válido
 
-  test('GET /launches/launchpad/:id should return launches by launchpad ID', async () => {
-    const response = await request(app).get('/launches/launchpad/456') // Substitua pelo ID válido
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  });
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('GET /launches/launchpad/name/:name should return launches by launchpad name', async () => {
+    const response: AxiosResponse<Launch[]> = await axiosInstance.get('/launches/launchpad/name/VAFB');
+  
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  
 
-  test('GET /launches/launchpad/name/:name should return launches by launchpad name', async () => {
-    const response = await request(app).get('/launches/launchpad/name/example') // Substitua pelo nome válido
+    // A launchpad VAFB SLC 3W possui o ID declarado abaixo, sendo assim, verificamos se algum lançamento do VAFB SLC 3W foi encontrado.
+    const launchpadIdToFind = "5e9e4501f509094ba4566f84";
+  
+    const launchpadFound = response.data.some((launch) => {
+      return launch.launchpad === launchpadIdToFind;
+    });
+  
+    expect(launchpadFound).toBe(true);
+  });
+  
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('GET /launches/core/:id should return launches by core ID', async () => {
+    const response: AxiosResponse = await axiosInstance.get('/launches/core/5eb87cd9ffd86e000604b32a'); // Substitua pelo ID válido
 
-  test('GET /launches/core/:id should return launches by core ID', async () => {
-    const response = await request(app).get('/launches/core/123') // Substitua pelo ID válido
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  });
 
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
+  it('POST /launches/time should return launches within a time period', async () => {
+    const response: AxiosResponse = await axiosInstance.post('/launches/time', {
+      startTime: '2012-01-01',
+      endTime: '2019-12-31',
+    });
 
-  test('POST /launches/time should return launches within a time period', async () => {
-    const response = await request(app).post('/launches/time')
-      .send({
-        startTime: '2012-01-01',
-        endTime: '2019-12-31'
-      })
-
-    expect(response.status).toBe(200)
-    expect(Array.isArray(response.body)).toBe(true)
-  })
-})
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.data)).toBe(true);
+  });
+});

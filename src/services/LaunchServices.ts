@@ -11,7 +11,7 @@ class LaunchService {
 
   public async getLaunchById(id: string): Promise<Launch | null> {
     const launch = await Launch.findByPk(id);
-    return launch;
+      return launch;
   }
 
   public async getRocketPending (): Promise<Launch | null> {
@@ -45,18 +45,26 @@ class LaunchService {
         return launchs;
     }
 
-    public async getLaunchsByCapsuleId(capsuleId: string[]): Promise<Launch[] | null> {
-      const launchs = await Launch.findAll({
-        where: {
-          capsules: {
-            [Op.contains]: capsuleId,
+    public async getLaunchsByCapsuleId(capsuleId: string): Promise<Launch[] | null> {
+      try {
+        const launchs = await Launch.findAll({
+          where: {
+            capsules: {
+              [Op.like]: [`%${capsuleId}%`],
+            },
           },
-        },
-        order: [['dateUnix', 'ASC']],
-      });
-    
-      return launchs;
+          order: [['dateUnix', 'ASC']],
+        });
+        return launchs || null;
+      } catch (error) {
+        console.error('Error in getLaunchsByCapsuleId:', error);
+        return null;
+      }
     }
+    
+    
+    
+    
     public async getLaunchsByPayloadId(payloadId: string[]): Promise<Launch[] | null> {
       const launchs = await Launch.findAll({
         where: {

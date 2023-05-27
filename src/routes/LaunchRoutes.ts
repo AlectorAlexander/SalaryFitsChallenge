@@ -11,10 +11,10 @@ launchRoutes.get('/', launchController.getAllLaunchs);
 launchRoutes.get('/:id', launchController.getLaunchById);
 
 // Rotas relacionadas a lançamentos bem-sucedidos
-launchRoutes.get('/success', launchController.getLaunchsSuccess);
+launchRoutes.get('/flightconference/success', launchController.getLaunchsSuccess);
 
 // Rotas relacionadas a lançamentos com falhas
-launchRoutes.get('/failure', launchController.getLaunchsFailure);
+launchRoutes.get('/flightconference/failure', launchController.getLaunchsFailure);
 
 // Rotas relacionadas a cápsulas
 launchRoutes.get('/capsule/:id', launchController.getLaunchsByCapsuleId);
