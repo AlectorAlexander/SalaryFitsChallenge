@@ -23,7 +23,8 @@ class LaunchService {
       limit: 1,
       })
       return launchs[0];
-}
+  }
+  
   public  async getRocketsSuccess (): Promise<Launch[] | null> {
     
     const launchs = await Launch.findAll({
