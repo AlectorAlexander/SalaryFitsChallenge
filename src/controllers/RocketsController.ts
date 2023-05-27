@@ -30,7 +30,7 @@ class RocketsController {
       res.status(500).json({ error: 'Failed to fetch rocket' });
     }
   };
-   public getRocketPending = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+   public getNextRocketPending = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const rocket = await this.rocketsService.getRocketPending();
       if (rocket) {
@@ -51,7 +51,7 @@ class RocketsController {
   public getRocketByName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { name } = req.params;
-      const newName = name.replace(/_/g, ' ').toUpperCase() as string 
+      const newName = name.replace(/_/g, ' ')
 
       const rocket = await this.rocketsService.getRocketByName(newName);
       if (rocket) {
@@ -72,7 +72,7 @@ class RocketsController {
     try {
       const { company } = req.params;
       
-      const newCompany = company.includes('_') ? company.replace(/_/g, ' ').toUpperCase() : company.toUpperCase() as string 
+      const newCompany = company.includes('_') ? company.replace(/_/g, ' ') : company.toUpperCase() as string 
       
 
       const rocket = await this.rocketsService.getRocketByCompany(newCompany);
@@ -132,6 +132,93 @@ class RocketsController {
   public getRocketsFailure = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const rockets = await this.rocketsService.getRocketsFailure();
+      if (rockets) {
+        res.status(200).json(rockets);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
+
+  public getActiveRocket =  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const rocket = await this.rocketsService.getActiveRocket();
+      if (rocket) {
+        res.status(200).json(rocket);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
+
+  public getFalconRockets = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const rockets = await this.rocketsService.getFalconRockets();
+      if (rockets) {
+        res.status(200).json(rockets);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
+
+  public getHighSuccessRateRockets = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const rockets = await this.rocketsService.getHighSuccessRateRockets();
+      if (rockets) {
+        res.status(200).json(rockets);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
+
+  public getRocketsWithImages = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const rockets = await this.rocketsService.getRocketsWithImages();
+      if (rockets) {
+        res.status(200).json(rockets);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
+
+  public getRocketsLaunchedAfterDate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { date } = req.params;
+      console.log(date);
+      const rockets = await this.rocketsService.getRocketsLaunchedAfterDate(date);
       if (rockets) {
         res.status(200).json(rockets);
       } else {
