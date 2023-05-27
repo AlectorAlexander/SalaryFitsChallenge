@@ -13,5 +13,7 @@ rocketsRoutes.get('/name/:name', rocketController.getRocketByName);
 
 rocketsRoutes.get('/company/:company', rocketController.getRocketByCompany);
 
+rocketsRoutes.get('/country/:country', rocketController.getRocketByCountry);
+
 
 export default rocketsRoutes;

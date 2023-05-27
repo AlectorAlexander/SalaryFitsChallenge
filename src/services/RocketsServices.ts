@@ -23,8 +23,8 @@ class RocketsService {
     return rocket;
   }
 
-  public async getRocketByCountry(country: string): Promise<Rocket | null> {
-    const rocket = await Rocket.findOne({ where: { country } });
+  public async getRocketByCountry(country: string): Promise<Rocket[] | null> {
+    const rocket = await Rocket.findAll({ where: { country } });
     return rocket;
   }
 

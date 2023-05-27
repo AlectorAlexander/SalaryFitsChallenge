@@ -52,9 +52,7 @@ class RocketsController {
   public getRocketByName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { name } = req.params;
-      const newName = name.replace('_', ' ').toUpperCase() as string 
-      console.log(newName);
-      
+      const newName = name.replace(/_/g, ' ').toUpperCase() as string 
 
       const rocket = await this.rocketsService.getRocketByName(newName);
       if (rocket) {
@@ -75,7 +73,7 @@ class RocketsController {
     try {
       const { company } = req.params;
       
-      const newCompany = company.includes('_') ? company.replace('_', ' ').toUpperCase() : company.toUpperCase() as string 
+      const newCompany = company.includes('_') ? company.replace(/_/g, ' ').toUpperCase() : company.toUpperCase() as string 
       
 
       const rocket = await this.rocketsService.getRocketByCompany(newCompany);
@@ -92,7 +90,31 @@ class RocketsController {
       return next({ message });
     }
   }
-  
+
+  public getRocketByCountry = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { country } = req.params;
+      const newCountry = country.includes('_') ? country.replace(/_/g, ' ').toUpperCase() : country.toUpperCase() as string
+      
+      const rocket = await this.rocketsService.getRocketByCountry(newCountry);
+      if (rocket) {
+        res.status(200).json(rocket);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+        }
+    }
+    catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+
+  }
+
 }
+  
+
 
 export default RocketsController;
