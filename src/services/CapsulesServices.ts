@@ -12,6 +12,20 @@ class CapsulesService {
     return capsule;
   }
 
+  public async getCapsulesByTimesUsed(): Promise<Capsule[] | null> {
+  try {
+    const capsules = await Capsule.findAll({
+      order: [['reuse_count', 'DESC']],
+    });
+
+    return capsules;
+  } catch (error) {
+    console.error('Error in getCapsulesByTimesUsed:', error);
+    return null;
+  }
+}
+
+
 }
 
 export default CapsulesService;
