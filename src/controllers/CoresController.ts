@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import CoresService from '../services/CoresServices';
 
 
@@ -30,6 +30,55 @@ class CoresController {
       res.status(500).json({ error: 'Failed to fetch core' });
     }
   };
+
+  public getLaunchesByRtlsLandings =  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const cores = await this.coresService.getLaunchesByRtlsLandings();
+      if (cores) {
+        res.status(200).json(cores);
+      } else {
+        const status = 404;
+        const message = 'Core not found';
+        return next({ status, message });
+      }
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  public getLaunchesByAsdsAttempts =  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const cores = await this.coresService.getLaunchesByAsdsAttempts();
+      if (cores) {
+        res.status(200).json(cores);
+      } else {
+        const status = 404;
+        const message = 'Core not found';
+        return next({ status, message });
+      }
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  public getLaunchesByAsdsLandings =  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const cores = await this.coresService.getLaunchesByAsdsLandings();
+      if (cores) {
+        res.status(200).json(cores);
+      } else {
+        const status = 404;
+        const message = 'Core not found';
+        return next({ status, message });
+      }
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
 }
 
 export default CoresController;
