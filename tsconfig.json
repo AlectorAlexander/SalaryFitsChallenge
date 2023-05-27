@@ -19,7 +19,7 @@
       "*": ["node_modules/*"]
     }
   },
-  "include": ["/**/*.ts"],
+  "include": ["/**/*.ts", "src/tests/LaunchesRoutes.test.ts"],
   "exclude": ["src/tests", "node_modules"],
   "ts-node": {
     "esm": true
