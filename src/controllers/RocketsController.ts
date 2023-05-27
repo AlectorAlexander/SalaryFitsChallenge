@@ -70,6 +70,28 @@ class RocketsController {
       return next({ message });
     }
   }
+
+  public getRocketByCompany = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { company } = req.params;
+      
+      const newCompany = company.includes('_') ? company.replace('_', ' ').toUpperCase() : company.toUpperCase() as string 
+      
+
+      const rocket = await this.rocketsService.getRocketByCompany(newCompany);
+      if (rocket) {
+        res.status(200).json(rocket);
+      } else {
+        const status  = 404;
+        const message = 'Nenhum foguete encontrado';
+        next({ status, message });
+      }
+    } catch (error) {
+      console.error(error);
+      const message = 'Erro interno do servidor';
+      return next({ message });
+    }
+  }
   
 }
 

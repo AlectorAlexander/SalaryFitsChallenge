@@ -18,8 +18,8 @@ class RocketsService {
     return rocket;
   }
 
-  public async getRocketByCompany(company: string): Promise<Rocket | null> {
-    const rocket = await Rocket.findOne({ where: { company } });
+  public async getRocketByCompany(company: string): Promise<Rocket[] | null> {
+    const rocket = await Rocket.findAll({ where: { company } });
     return rocket;
   }
 

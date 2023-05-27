@@ -11,5 +11,7 @@ rocketsRoutes.get('/:id', rocketController.getRocketById);
 
 rocketsRoutes.get('/name/:name', rocketController.getRocketByName);
 
+rocketsRoutes.get('/company/:company', rocketController.getRocketByCompany);
+
 
 export default rocketsRoutes;
