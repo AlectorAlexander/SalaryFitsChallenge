@@ -3,7 +3,7 @@ require("dotenv/config");
 
 module.exports = {
    'env': process.env.NODE_ENV || 'development',
-  'config': path.resolve(__dirname, 'src', 'database', 'config', 'sequelize.config.ts'),
+  'config': path.resolve(__dirname, 'build', 'database', 'config', 'sequelize.config.js'),
   'models-path': path.resolve(__dirname, 'src', 'database', 'models'),
   'seeders-path': path.resolve(__dirname, 'src', 'database', 'seeders'),
   'migrations-path': path.resolve(__dirname, 'src', 'database', 'migrations'),
