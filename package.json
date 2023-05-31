@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "create-db": "sequelize db:create",
-    "migrate": "sequelize db:create && npx sequelize-cli db:migrate --config build/database/config/sequelize.config.js",
+    "migrate": "sequelize db:create && npx sequelize-cli db:migrate --config src/database/config/sequelize.config.ts",
     "migrate:reset": "sequelize db:create && sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
     "build": "tsc",
     "start": "node build/index.js",
